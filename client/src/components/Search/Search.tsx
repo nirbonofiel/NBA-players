@@ -1,17 +1,17 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { Button, TextField } from '@mui/material';
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../store/store';
+import { fetchPlayers } from '../../store/playersSlice';
+import "./styles.css";
 
-type SearchProps = {
-    getShows: (search:string)=> void;
-}
-
-const Search: React.FC<SearchProps> = React.memo(({getShows}) => {
-
+const Search: React.FC = React.memo(() => {
     const [search, setSearch] = useState('');
+    const dispatch = useDispatch<AppDispatch>();
 
     const handleGetShows = () => {
-        getShows(search);
+        dispatch(fetchPlayers({ path: 'players', cursor: 0, search: search }));
         setSearch('');
     }
 
@@ -20,11 +20,11 @@ const Search: React.FC<SearchProps> = React.memo(({getShows}) => {
     }
 
     return (
-        <div style={{marginTop:20}}>
-             <TextField id="outlined-basic" variant="outlined" value={search} onChange={handleSetValue}/>
-             <Button variant="outlined" color="primary" onClick={handleGetShows} style={{ height: '56px'}}>Search</Button>
+        <div className='search-container'>
+            <TextField id="outlined-basic" variant="outlined" value={search} onChange={handleSetValue} />
+            <Button variant="outlined" color="primary" onClick={handleGetShows} disabled={search === ''}>Search</Button>
         </div>
     );
- }); 
+});
 
- export default Search;
+export default Search;

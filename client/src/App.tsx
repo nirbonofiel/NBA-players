@@ -1,54 +1,31 @@
-import { useCallback, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
-import { getTvShows } from './api/apiAction';
-import Search from './components/Search/Search';
-import Genre from './components/Genre/Genre';
-import TvShow from './components/TvShow/TvShow';
-import { TvShowData } from './types/types';
-import ShowDetails from './components/ShowDetails/ShowDetails';
-import { CircularProgress } from '@mui/material';
+import { Grid } from '@mui/material';
+import { AppDispatch, RootState } from './store/store';
+import { useEffect } from 'react';
+import { fetchPlayers } from './store/playersSlice';
+import FavoritePlayersList from './components/FavoritePlayersList/FavoritePlayersList';
+import NBAPlayers from './components/NBAPlayers/NBAPlayers';
 
 
 
 function App() {
-  const [tvShows, setTvShows] = useState<TvShowData[]>();
-  const [genres, setGenres] = useState<string[]>();
-  const [tvShowsByGenres, setTvShowsByGenres] = useState<TvShowData[]>();
-  const [showDetails, setShowDetails] = useState(false);
-  const [currnetShow, setCurrentShow] = useState<TvShowData>();
-  const [progress,setProgress] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const { next_cursor } = useSelector((state: RootState) => state.players);
 
-  const handleShowDetails = useCallback((show: TvShowData) => {
-    setCurrentShow(show);
-    setShowDetails(true);
-  },[]);
-
-
-  const getShows = useCallback(async(search:string) => {
-    setProgress(true);
-    const result = await getTvShows(`/tvshow?q=${search}`);
-    let genresMovie: string[] = [];
-    if(result){
-      setProgress(false);
-      setTvShows(result.map((element:any) => element.show));
-      genresMovie = Array.from(new Set (result.flatMap((element:any) => element.show.genres)));
-      setGenres(genresMovie);
-      setTvShowsByGenres([]);
-    }
-  },[]);
+  useEffect(() => {
+      dispatch(fetchPlayers({ path: 'players', cursor: next_cursor > 0 ? next_cursor : undefined }));
+  }, [dispatch])
 
   return (
-    <div className="App">
-      <Search getShows={getShows}/>
-      { progress && 
-        <CircularProgress style={{marginTop:50}}/>
-      }
-      <Genre genres={genres} setFilteredTvShow={setTvShowsByGenres} tvShows={tvShows}/>
-      <TvShow tvShows={tvShowsByGenres} handleShowDetails={handleShowDetails}/>
-      {showDetails &&
-        <ShowDetails open={showDetails} closeModal={setShowDetails} show={currnetShow}/>
-      }
-    </div>
+    <Grid container
+      direction="row"
+      justifyContent="space-around"
+      alignItems="stretch"
+      className='App'>
+      <NBAPlayers />
+      <FavoritePlayersList />
+    </Grid>
   );
 }
 

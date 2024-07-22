@@ -1,0 +1,5 @@
+
+.players-container{
+  max-height: 600px;
+  overflow-x: auto;
+}

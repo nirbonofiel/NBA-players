@@ -1,5 +1,8 @@
-
-.nba-title{
-  margin-top: 20px;
-  margin-bottom: 20px;
+@media only screen and (max-width: 600px) {
+  .nba-title{
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+    font-size: 26px !important;
+  }
+  
 }

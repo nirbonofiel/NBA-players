@@ -13,10 +13,10 @@ const PlayerDetails: React.FC<PlayerDetailsProps> = React.memo(({ first_name, la
     const fullName = `${first_name} ${last_name}`
     return (
         <>
-            <Typography variant="h5" component="span">
+            <Typography variant="h5" component="span" className='full-name'>
                 {fullName}
             </Typography>
-            <Typography sx={style} color="text.secondary">
+            <Typography sx={style} color="text.secondary" className='team-name'>
                 {team_name}
             </Typography>
         </>

@@ -1,7 +1,4 @@
-.search-container{
-  margin-bottom: 20px;
+.full-name{
+  font-size: 1.3rem !important;
 }
 
-button{
-  height: 56px;
-}

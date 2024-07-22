@@ -23,8 +23,8 @@ const FavoritePlayer: React.FC<PlayerProps> = React.memo(({ player }) => {
             }
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel2-content"
-                id="panel2-header"
+                aria-controls={`${player.first_name}-content`}
+                id={`${player.first_name}-header`}
             >
                 <PlayerDetails first_name={first_name} last_name={last_name} team_name={team_name}
                     style={{ fontSize: 14, marginLeft: '5px', alignSelf: 'end' }} />

@@ -1,9 +1,10 @@
 import axios from 'axios';
+import { PLAYERS_TOKEN , PLAYERS_URL } from "../constants/ApiConstants";
 
 const instance = axios.create({
-  baseURL: 'https://api.balldontlie.io/v1/',
+  baseURL: PLAYERS_URL,
   headers: {
-    'Authorization': 'c6cc2159-a33f-4c43-bc19-8e9fa968be73', 
+    'Authorization': PLAYERS_TOKEN, 
   },
 });
 

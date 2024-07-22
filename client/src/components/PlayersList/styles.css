@@ -3,3 +3,9 @@
   max-height: 600px;
   overflow-x: auto;
 }
+
+@media only screen and (max-width: 1600px) {
+  .players-container{
+    max-height: 480px;
+  }
+}

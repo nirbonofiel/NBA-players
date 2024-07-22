@@ -31,15 +31,20 @@ const FavoritePlayer: React.FC<PlayerProps> = React.memo(({ player }) => {
             </AccordionSummary>
                 <AccordionDetails sx={{ display: 'flex' }}>
             {stats ?
-                    <><Typography>
+                    <>
+                    <Typography sx={{fontSize:'1.1rem'}}>
                         games: {stats.games_played}
-                    </Typography><Typography>
+                    </Typography>
+                    <Typography sx={{fontSize:'1.1rem'}}>
                             min: {stats.min}
-                        </Typography><Typography>
+                        </Typography>
+                        <Typography sx={{fontSize:'1.1rem'}}>
                             pts: {stats.pts}
-                        </Typography><Typography>
+                        </Typography>
+                        <Typography sx={{fontSize:'1.1rem'}}>
                             reb: {stats.reb}
-                        </Typography><Typography>
+                        </Typography>
+                        <Typography sx={{fontSize:'1.1rem'}}>
                             ast:  {stats.ast}
                         </Typography></>
                     :

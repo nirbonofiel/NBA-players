@@ -41,13 +41,7 @@ const playersSlice = createSlice({
         }, 
         removeFromFavorite(state, action: PayloadAction<PlayerData>) {
             state.favPlayers = state.favPlayers.filter(player => player.id !== action.payload.id);
-        },
-        setLoading(state, action: PayloadAction<boolean>) {
-            state.loading = action.payload;
-        },
-        setError(state, action: PayloadAction<string>) {
-            state.error = action.payload;
-        },
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -70,5 +64,5 @@ const playersSlice = createSlice({
     },
 });
 
-export const { addToFavorite, removeFromFavorite, setLoading ,setError } = playersSlice.actions;
+export const { addToFavorite, removeFromFavorite } = playersSlice.actions;
 export default playersSlice.reducer;
